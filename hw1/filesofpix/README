@@ -1,0 +1,12 @@
+Drew Maynard (amayna01) Joel Brandinger (jbrand12)
+
+We received help from multiple TA's in office hours for some memory issues
+and implementation advice.
+
+We beleive everything has been correctly implemented. There was one odd line
+when printing restored version of sail-corrupt.pgm, but since this was the
+only image with such a line we assume it is just part of the image. Our
+program is also limited to reading file names in the command line of a 
+maximum of 1,0000 characters. However, readaline can handle unlimited bytes.
+
+Total hours spent: 40 hours.
