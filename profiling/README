@@ -1,0 +1,24 @@
+*******************************************************************************
+Sabrina Fried (sfried10) & Joel Brandinger (jbrand12)
+COMP40 HW7 - Profiling README
+
+Last Edited: April 24, 2022
+*******************************************************************************
+
+Acknowledgements:
+- Several COMP40 TAs
+- Rachel Scrivanich (rscriv01) & Andrew Maynard (amayna01) for use of their UM
+
+
+The function that takes the longest is execute in um_execution as it contains 
+the implementation of the um's machine cycle.
+    
+    Besides that, the routine that takes the longest is segment_load as it is 
+    called very frequently and is calling on memory.
+        
+        There is very little that can be done to improve the speed of this
+        function besides directly returning a value instead of initializing
+        a temporary variable
+
+Time spent analyzing: 4 hours
+Time spent solving: 12 hours
