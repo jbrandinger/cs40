@@ -1,0 +1,53 @@
+Joel Brandinger & Andrew Maynard
+
+Throughout the compression & decompression process we include 6 different
+file in order to modularize the program.
+
+1. RGBtypeconvert.h & .c:
+    This file converts the red, green, & blue values from the Pnm_rgb structs
+from unsigned to floating point representation for the first step of the
+compression process. For the decomression process, this is the last step &
+performs the inverse. That is, it converts from floating point representation
+to unsigned so that it can be inserted into the A2Methods_UArray2 for the ppm.
+
+2. colorspace.h & .c:
+    Converts from RGB color space to component video color space during the
+compression and backwards from component video to RGB during the decompression.
+    
+3. DCT.h & .c:
+    Compression - perform discrete cosine transformation to get y, pb, & pr 
+into Pb avg., Pr avg., a, b, c, d values for each 2 by 2 block. 
+    Decompression - perform inverse DCT to retrieve y, pb, pr from each pixel.
+And expand into 2 by 2 blocks.
+
+4. quant.h & .c:
+Compression - quantize the values created in DCT so that the values are able 
+              to fit in the desired number of bits and are prepped for packing.
+Decomression - unquantize the information taken from the parts of the bits
+               so they are able to be transformed to ppm form
+
+
+5. pack.h & .c:
+    Compression - Pack the components of a pixel into one 64bit variable
+    Decomression - Unpack the parts of a packed 64 bit int and store them 
+                   as seperate entities.
+6. bigE.h & .c:
+    Compression - Print the packed integers out as characters in big endian
+                  form to standart output.
+    Decompression - Read in a file stream that contains characters in big 
+                    endian form and store the characters four at a time 
+                    in one 64 bit integer.
+
+We received help from various TAs throughout this assignment. Special thanks
+to all of the TAs who helped solve the problem starting at 15:00 and ending
+at 21:48pm on Thursday the 10th of March. At the end of the day, it ended
+up being Gustavo (aka "The Man") who showed us how our bitpack implementation
+was messing with our numbers. We apologize to Jeremy and Bridget who found 
+the error but we sadly convinced them that our bitpack was fine.
+
+We believe everything has been implemented correctly.
+
+We spent approximately 10 hours analyzing the problems.
+
+We spent approximately 35 hours solving the problems.
+
