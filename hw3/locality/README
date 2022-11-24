@@ -1,0 +1,89 @@
+Andrew Maynard and Joel Brandinger
+
+We received some help from various TAs to help with some debugging.
+
+We have correctly implemented everything except for our block major
+mapping. Although it works, it takes longer than column major, which
+is not what was anticipated. This is because we have a larger array
+than we actually need in our blocked array implementation. When we
+go to map, we visit every spot in the array including some that are
+extra at the end of blocks. What we put in the mapping is that we
+only use the apply function on the elements that fall into the
+actual image dimensions.
+
+We implemented the blocked array just as the spec suggested: the 
+blocked array is a UArray2_T in which each element represents a
+block and within each block is one UArray_T that holds the elements.
+
+90 degree rotation-
+    Column major results on flower.ppm:
+        Size = 18180.000000 pixels
+        Total time = 1610765.000000 nanoseconds
+        Instructions per pixel = 1610765.000000 instructions
+        Time per pixel = 88.600935 nanoseconds
+
+
+    Row major results on flower.ppm:
+        Size = 18180.000000 pixels
+        Total time = 982708.000000 nanoseconds
+        Instructions per pixel = 982708.000000 instructions
+        Time per pixel = 54.054345 nanoseconds
+
+    Block major results on flower.ppm:
+        Size = 18180.000000 pixels
+        Total time = 2117703.000000 nanoseconds
+        Instructions per pixel = 2117703.000000 instructions
+        Time per pixel = 116.485314 nanoseconds
+
+180 degree rotation-
+    Column major results on flower.ppm:
+        Size = 18180.000000 pixels
+        Total time = 1199318.000000 nanoseconds
+        Instructions per pixel = 1199318.000000 instructions
+        Time per pixel = 65.969087 nanoseconds
+
+    Row major results on flower.ppm:
+        Size = 18180.000000 pixels
+        Total time = 1180937.000000 nanoseconds
+        Instructions per pixel = 1180937.000000 instructions
+        Time per pixel = 64.958031 nanoseconds
+
+    Block major results on flower.ppm:
+        Size = 18180.000000 pixels
+        Total time = 2204205.000000 nanoseconds
+        Instructions per pixel = 2204205.000000 instructions
+        Time per pixel = 121.243399 nanoseconds
+
+0 degree rotation-
+    Block major results on flower.ppm:
+        Size = 18180.000000 pixels
+        Total time = 1152.000000 nanoseconds
+        Instructions per pixel = 1152.000000 instructions
+        Time per pixel = 0.063366 nanoseconds
+         
+    Row major results on flower.ppm:
+        Size = 18180.000000 pixels
+        Total time = 1284.000000 nanoseconds
+        Instructions per pixel = 1284.000000 instructions
+        Time per pixel = 0.070627 nanoseconds
+
+         
+    Column major results on flower.ppm:
+        Size = 18180.000000 pixels
+        Total time = 801.000000 nanoseconds
+        Instructions per pixel = 801.000000 instructions
+        Time per pixel = 0.044059 nanoseconds
+
+Results: 
+-0 degree rotation the same because we perform no operations
+on the images
+-90 degree rotation row then col then block...should be row then
+block, but we had incorrect implementation of block map.
+-180 degree rotation Row and column seem to be similar, but row
+is still faster, block struggles again. As predicted, 90 and 180
+degrees take the same amount of time because the only difference
+is the index conversion.
+         
+
+Device used for testing: 
+    Macbook Pro 2019 13-inch, 2.8 GHz Quad-Core Intel Core i7

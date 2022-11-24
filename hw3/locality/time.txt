@@ -1,0 +1,4 @@
+Size = 18180.000000 pixels
+Total time = 775.000000 nanoseconds
+Instructions per pixel = 775.000000 instructions
+Time per pixel = 0.042629 nanoseconds
